@@ -1,0 +1,6 @@
+/* The centered column that the page header, main content and footer share */
+.container {
+  max-width: var(--page-max);
+  margin-inline: auto;
+  padding-inline: var(--space-4);
+}

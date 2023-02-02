@@ -1,0 +1,49 @@
+---
+import { editUrl, homeUrl, postUrl } from "@/lib/navigation/routes";
+import type { Neighbors } from "@/lib/posts/graph";
+import type { Post } from "@/lib/posts/collection";
+import { t } from "@/i18n/t";
+
+interface Props {
+  neighbors: Neighbors<Post>;
+  post: Post;
+}
+
+const { neighbors, post } = Astro.props;
+const { lang } = post;
+const { newer, older } = neighbors;
+---
+
+<nav class="post-nav" aria-label={t(lang, "nav.posts")}>
+  {older && (
+    <a class="older tap-target" href={postUrl(older.lang, older.slug)}>
+      ← {t(lang, "post.older")}: {older.data.title}
+    </a>
+  )}
+  <a class="back tap-target" href={homeUrl(lang)}>
+    {t(lang, "post.back")}
+  </a>
+  {newer && (
+    <a class="newer tap-target" href={postUrl(newer.lang, newer.slug)}>
+      {t(lang, "post.newer")}: {newer.data.title} →
+    </a>
+  )}
+  <a class="edit tap-target" href={editUrl(post.filePath)}>
+    $ vim {post.fileName}
+  </a>
+</nav>
+
+<style>
+  .post-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-4);
+    margin-top: var(--space-8);
+    padding-top: var(--space-3);
+    border-top: var(--rule);
+  }
+
+  .edit {
+    margin-left: auto;
+  }
+</style>

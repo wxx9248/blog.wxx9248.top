@@ -1,0 +1,31 @@
+---
+import {
+  type Post,
+  getPosts,
+  getTranslations,
+  postStaticPaths
+} from "@/lib/posts/collection";
+import Demo from "@/components/Demo.astro";
+import PostLayout from "@/layouts/PostLayout.astro";
+import { adjacent } from "@/lib/posts/graph";
+import { render } from "astro:content";
+
+export const getStaticPaths = postStaticPaths;
+
+interface Props {
+  post: Post;
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const posts = await getPosts(post.lang);
+const neighbors = adjacent(
+  posts,
+  posts.findIndex(({ id }) => id === post.id)
+);
+const translations = await getTranslations(post);
+---
+
+<PostLayout neighbors={neighbors} post={post} translations={translations}>
+  <Content components={{ Demo }} />
+</PostLayout>

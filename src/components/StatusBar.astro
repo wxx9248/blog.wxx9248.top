@@ -1,0 +1,175 @@
+---
+import LanguageSwitcher from "./LanguageSwitcher.astro";
+import type { LanguageTargets } from "@/lib/language/targets";
+import type { Locale } from "@/i18n/locales";
+import ThemeToggle from "./ThemeToggle.astro";
+import { searchUrl } from "@/lib/navigation/routes";
+import { siteLinks } from "@/lib/navigation/site-links";
+import { t } from "@/i18n/t";
+
+interface Props {
+  lang: Locale;
+  label: string;
+  showProgress: boolean;
+  targets: LanguageTargets;
+}
+
+const { label, lang, showProgress, targets } = Astro.props;
+---
+
+{showProgress && (
+  <div class="progress-track" aria-hidden="true">
+    <div class="progress-bar" data-reading-progress-bar />
+  </div>
+)}
+
+<nav class="status-bar" aria-label={t(lang, "nav.menu")}>
+  <p class="mode">
+    <span class="badge">NORMAL</span>
+    <span class="label">{label}</span>
+    {showProgress && (
+      <span class="percent" data-reading-progress>
+        0%
+      </span>
+    )}
+  </p>
+  <div class="controls">
+    <button
+      type="button"
+      class="control tap-target phone-only"
+      popovertarget="site-menu"
+      aria-label={t(lang, "nav.menu")}
+    >
+      <span aria-hidden="true">≡</span>
+    </button>
+    {siteLinks(lang).map(({ href, label }) => (
+      <a class="control tap-target wide-only" href={href}>
+        {t(lang, label)}
+      </a>
+    ))}
+    <a
+      class="control tap-target"
+      href={searchUrl(lang)}
+      aria-label={t(lang, "nav.search")}
+    >
+      <kbd aria-hidden="true">/</kbd>
+      <span class="wide-only" aria-hidden="true">
+        {t(lang, "nav.search")}
+      </span>
+    </a>
+    <button
+      type="button"
+      class="control tap-target phone-only"
+      popovertarget="site-menu"
+    >
+      <span aria-hidden="true">{lang}</span>
+      <span class="visually-hidden">{t(lang, "nav.language")}</span>
+    </button>
+    <div class="control tap-target wide-only">
+      <LanguageSwitcher lang={lang} targets={targets} variant="codes" />
+    </div>
+    <ThemeToggle class="control tap-target" lang={lang} />
+  </div>
+</nav>
+
+<script>
+  import "@/scripts/posts/reading-progress";
+</script>
+
+<style>
+  /* Relative because Lightning CSS doesn't resolve the @/ alias here */
+  @import "../styles/media.css";
+
+  .status-bar {
+    position: fixed;
+    inset: auto 0 0;
+    z-index: var(--z-statusbar);
+    display: flex;
+    height: var(--statusbar-height);
+    padding-bottom: env(safe-area-inset-bottom);
+    background: var(--color-action-primary);
+    color: var(--color-text-on-primary);
+    font-size: var(--text-meta);
+    font-weight: 700;
+  }
+
+  .mode {
+    display: none;
+    min-width: 0;
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .controls {
+    display: flex;
+    flex: 1;
+    justify-content: space-around;
+  }
+
+  .control {
+    min-width: var(--tap-min);
+    justify-content: center;
+    padding: 0 var(--space-2);
+    border: 0;
+    background: none;
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  kbd {
+    font: inherit;
+  }
+
+  .wide-only {
+    display: none;
+  }
+
+  .progress-track {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: var(--z-progress);
+    height: 2px;
+  }
+
+  .progress-bar {
+    height: 100%;
+    background: var(--color-accent);
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+
+  @media (--tablet-up) {
+    .status-bar {
+      justify-content: space-between;
+      padding-inline: var(--space-3);
+    }
+
+    .mode {
+      display: flex;
+      gap: var(--space-2);
+      align-items: center;
+    }
+
+    .controls {
+      flex: none;
+      gap: var(--space-1);
+    }
+
+    .control {
+      min-width: 0;
+      min-height: 0;
+    }
+
+    .wide-only {
+      display: inline-flex;
+    }
+
+    .phone-only,
+    .progress-track {
+      display: none;
+    }
+  }
+</style>

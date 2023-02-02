@@ -1,0 +1,166 @@
+---
+import Prompt, { type PromptSegment } from "./Prompt.astro";
+import { formatDate, formatSize } from "@/lib/posts/format";
+import type { Locale } from "@/i18n/locales";
+import type { Post } from "@/lib/posts/collection";
+import { postUrl } from "@/lib/navigation/routes";
+import { t } from "@/i18n/t";
+
+interface Props {
+  // The listed directory as it appears in the command, e.g. "posts/"
+  directory: string;
+  lang: Locale;
+  posts: readonly Post[];
+  segments: readonly PromptSegment[];
+}
+
+const { directory, lang, posts, segments } = Astro.props;
+---
+
+<section class="listing">
+  <Prompt segments={segments}>
+    <span class="command-wide">ls -lt {directory}</span>
+    <span class="command-narrow">ls -1t {directory}</span>
+  </Prompt>
+  <p class="ls-total">total {posts.length}</p>
+  <ol class="entries plain-list">
+    {posts.map((post) => (
+      <li>
+        <a class="entry" href={postUrl(post.lang, post.slug)}>
+          <span class="permissions" aria-hidden="true">
+            -rw-r--r--
+          </span>
+          <span class="size">{formatSize(post.sizeBytes)}</span>
+          <time class="date" datetime={post.data.date.toISOString()}>
+            {formatDate(post.data.date)}
+          </time>
+          <span class="title">{post.data.title}</span>
+          <span class="minutes">
+            {t(lang, "post.readingTime", {
+              minutes: post.readingMinutes
+            })}
+          </span>
+          <span class="tags tag">
+            {post.data.tags.map((tag) => `#${tag}`).join(" ")}
+          </span>
+        </a>
+      </li>
+    ))}
+  </ol>
+</section>
+
+<style>
+  .listing {
+    container-type: inline-size;
+  }
+
+  .command-wide,
+  .permissions {
+    display: none;
+  }
+
+  .entries {
+    margin: 0 0 var(--space-4);
+  }
+
+  /* Phones and other narrow containers: stacked `ls -1` entries */
+  .entry {
+    display: grid;
+    grid-template-areas:
+      "title title title"
+      "date size minutes"
+      "tags tags tags";
+    grid-template-columns: auto auto 1fr;
+    column-gap: 1ch;
+    min-height: var(--tap-min);
+    margin-bottom: var(--space-2);
+    padding: var(--space-2) 0 var(--space-2) var(--space-3);
+    border-left: 2px solid var(--color-border-default);
+    color: var(--color-text-muted);
+    text-decoration: none;
+  }
+
+  .title {
+    grid-area: title;
+    color: var(--color-text-primary);
+    font-family: var(--font-prose);
+    font-size: var(--text-entry);
+    font-weight: 700;
+  }
+
+  .date {
+    grid-area: date;
+  }
+
+  .size {
+    grid-area: size;
+  }
+
+  .minutes {
+    grid-area: minutes;
+  }
+
+  .size::before,
+  .minutes::before {
+    content: "· ";
+  }
+
+  .tags {
+    grid-area: tags;
+  }
+
+  @media (hover: hover) {
+    .entry:hover {
+      border-left-color: var(--color-accent);
+    }
+  }
+
+  /* Wide containers: `ls -l` columns */
+  @container (width >= 44rem) {
+    .command-wide {
+      display: inline;
+    }
+
+    .command-narrow,
+    .minutes {
+      display: none;
+    }
+
+    .entry {
+      grid-template-areas: "permissions size date title tags";
+      grid-template-columns: auto 5ch auto auto 1fr;
+      align-items: baseline;
+      column-gap: 2ch;
+      min-height: 0;
+      margin-bottom: 0;
+      padding: var(--space-1) 0;
+      border-left: 0;
+    }
+
+    .permissions {
+      display: inline;
+      grid-area: permissions;
+      color: var(--color-text-muted);
+    }
+
+    .size {
+      color: var(--color-text-secondary);
+      text-align: right;
+    }
+
+    .size::before {
+      content: none;
+    }
+
+    /* One row of `ls -l` output: the title matches the other columns */
+    .title {
+      font-size: inherit;
+    }
+
+    .tags {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+</style>

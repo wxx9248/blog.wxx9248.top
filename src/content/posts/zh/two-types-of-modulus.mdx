@@ -1,0 +1,98 @@
+---
+title: 两种取模运算
+date: 2021-02-15
+tags: [C, Python, 取模]
+---
+
+import ModDemo from "@/widgets/ModDemo.vue";
+
+## 0x00 前言
+
+最近在学离散数学，开始接触一点基础的数论知识。
+
+在讲[扩展欧几里得算法 (Extended Euclidean Algorithm)](https://en.wikipedia.org/wiki/Extended_Euclidean_algorithm)的时候，发现数学上用的取模运算和计算机语言普遍实现的算法不一样。
+
+其实在很久以前，学Python的时候就有此疑问（Python实现的是数学上用的取模），但是<del>由于我懒</del>，我并没有深入理解这两种取模的具体细节，于是就有了这篇文章。
+
+## 0x01 问题引入
+
+如果你有幸学过C和Python，就应该清楚两种语言中的取模(%)的实现是不一样的，这种实现上的差异可以在操作数是**负数**的时候表现出来。
+
+请看下面的两个例子：
+
+```c
+#include <stdio.h>
+int main(void)
+{
+    printf("%d", -8 % 7);
+    return 0;
+}
+```
+
+```python
+print(-8 % 7)
+```
+
+你会发现，这两个程序同样是在求$-8 \bmod 7$, 但是运行结果却不一样：
+
+- C语言的执行结果是$-1$
+- Python的执行结果是$6$
+
+这是为什么呢？<del>（自问自答的屑</del>
+
+## 0x02 原因解析
+
+原因是C语言和Python采用了不同的对于取模的定义：
+
+- C语言采用截断式取模（truncated modulus）
+- Python采用向下取整式取模（floor modulus）
+
+我们知道，我们对于取模运算的定义是：
+
+$$
+a \bmod b = a - b \cdot (a \backslash b)
+$$
+
+两种定义对于$a \backslash b$的解释不同：
+
+- 截断式取模采用截断式整数除法，即直接截断小数位，只保留整数位
+- 向下取整式取模采用向下取整式整数除法，即先进行浮点除法，再对结果进行向下取整
+
+这也是两种取模方式名称的由来。
+
+<Demo title="a mod b">
+  <ModDemo client:visible lang="zh" />
+</Demo>
+
+## 0x03 结果验证
+
+按照上述原理，我们可以验证上面的C代码和Python代码。
+
+计算$-8 \bmod 7$：
+
+$$
+-\frac{8}{7} \approx -1.142857
+$$
+
+截断式取模：
+
+$$
+-8 \bmod 7 = -8 - 7 \times (-8 \backslash 7) = -8 - 7 \times (-1) = -1
+$$
+
+向下取整式取模：
+
+$$
+\lfloor-1.142857\rfloor = -2
+$$
+
+$$
+-8 \bmod 7 = -8 - 7 \times (-8 \backslash 7) = -8 - 7 \times (-2) = 6
+$$
+
+## 0x04 尾注
+
+1. 对于整除运算，C和Python中也采用相应的实现，即
+   - C语言中，`-8 / 7 == -1`
+   - Python中，`-8 // 7 == -2`
+2. 在一些资料中，截断式取模运算不叫作取模（modulus）运算，而叫做求余（remainder）运算，以与向下取整式取模运算区分。（有一些人还称后者为真·取模（true modulus）运算）

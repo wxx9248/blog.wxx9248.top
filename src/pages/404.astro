@@ -1,0 +1,48 @@
+---
+import { defaultLocale, localeInfo, locales } from "@/i18n/locales";
+import Base from "@/layouts/Base.astro";
+import { homeUrl } from "@/lib/navigation/routes";
+import { t } from "@/i18n/t";
+
+const lang = defaultLocale;
+// A static page can't know the requested path; a script fills it in
+const unknownPath = "…";
+---
+
+<Base
+  canonicalPath="/404.html"
+  context={{ kind: "unlocalized" }}
+  lang={lang}
+  prompt={{ command: `cd ${unknownPath}`, segments: [] }}
+  statusLabel="404"
+  title="404"
+>
+  <meta slot="head" name="robots" content="noindex" />
+  <p>
+    <code data-requested-path>{unknownPath}</code>:{" "}
+    {t(lang, "notFound.message")}
+  </p>
+  <ul class="plain-list">
+    {locales.map((locale) => (
+      <li>
+        <a
+          class="tap-target"
+          href={homeUrl(locale)}
+          lang={localeInfo[locale].htmlLang}
+        >
+          cd ~/{locale}
+        </a>
+      </li>
+    ))}
+  </ul>
+</Base>
+
+<script>
+  const path = location.pathname;
+  for (const element of document.querySelectorAll("[data-requested-path]")) {
+    element.textContent = path;
+  }
+  for (const element of document.querySelectorAll("[data-prompt-command]")) {
+    element.textContent = `cd ${path}`;
+  }
+</script>

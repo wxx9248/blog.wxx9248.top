@@ -1,0 +1,54 @@
+/* Article text: the rendered Markdown of a post */
+.prose {
+  max-width: var(--measure);
+  font-family: var(--font-prose);
+  font-size: var(--text-body);
+  line-height: var(--leading-prose);
+  overflow-wrap: anywhere;
+}
+
+/* Headings in the light cyan, as on www.wxx9248.top */
+.prose :is(h1, h2, h3, h4, h5, h6) {
+  color: var(--color-text-heading);
+  line-height: var(--leading-heading);
+}
+
+.prose :is(h2, h3, h4, h5, h6) {
+  margin: var(--space-8) 0 var(--space-3);
+}
+
+/* The browser default for h6 is well below the body text */
+.prose :is(h5, h6) {
+  font-size: var(--text-chrome);
+}
+
+.prose :is(h2, h3, h4, h5, h6) > a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.prose .heading-marker {
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-weight: 400;
+}
+
+/* Wide content scrolls inside its own box so the page never does */
+.prose pre,
+.prose .katex-display {
+  overflow-x: auto;
+}
+
+/* The table scrolls, so its cells wrap only between words */
+.prose table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-wrap: break-word;
+}
+
+/* Their heading is hidden, so a rule sets them apart from the post */
+.prose .footnotes {
+  margin-top: var(--space-8);
+  border-top: var(--rule);
+}

@@ -1,0 +1,60 @@
+{
+  "name": "blog.wxx9248.top",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@12.18.0",
+  "engines": {
+    "node": ">=22.23.4"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "pnpm lint && pnpm typecheck && astro build && pnpm search:index",
+    "preview": "wrangler dev",
+    "search:index": "pagefind --site dist",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "format": "prettier --write .",
+    "typecheck": "astro check && vue-tsc --noEmit",
+    "test:unit": "vitest run",
+    "test:e2e": "playwright test",
+    "test": "pnpm test:unit && pnpm test:e2e"
+  },
+  "dependencies": {
+    "@astrojs/markdown-remark": "^7.3.5",
+    "@astrojs/mdx": "^8.1.2",
+    "@astrojs/rss": "^4.0.19",
+    "@astrojs/sitemap": "^3.7.4",
+    "@astrojs/vue": "^7.1.2",
+    "@wxx9248/colors": "^1.1.0",
+    "astro": "^7.4.5",
+    "astro-expressive-code": "^0.44.3",
+    "katex": "^0.19.1",
+    "rehype-autolink-headings": "^7.1.0",
+    "rehype-katex": "^7.0.1",
+    "remark-math": "^6.0.0",
+    "vue": "^3.5.45"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.12",
+    "@axe-core/playwright": "^4.14.0",
+    "@eslint/js": "^10.0.1",
+    "@fontsource/jetbrains-mono": "^5.3.0",
+    "@playwright/test": "^1.64.1",
+    "@types/hast": "^3.0.5",
+    "@types/node": "^26.6.6",
+    "eslint": "^10.14.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-astro": "^3.2.1",
+    "eslint-plugin-vue": "^10.12.0",
+    "globals": "^17.14.0",
+    "lightningcss": "^1.33.0",
+    "pagefind": "^1.6.0",
+    "prettier": "^3.9.10",
+    "prettier-plugin-astro": "^1.1.2",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.72.1",
+    "vitest": "^5.1.0",
+    "vue-tsc": "^3.3.14",
+    "wrangler": "^4.157.0"
+  }
+}

@@ -1,0 +1,4 @@
+# Files Cloudflare can't serve properly live in Oracle Object Storage: static
+# assets have a 25 MiB limit and ignore Range requests, which audio and video
+# need for seeking. The URL is a read-only pre-authenticated request.
+/storage/* https://objectstorage.ca-toronto-1.oraclecloud.com/p/G6ah1qRQ9BJ9SV0Q2p-q9POs6fyHk8Hgi0l_4vrrWDyJpx2-xavFNBn-UvJ6MfHd/n/yzbgpyijsgpp/b/blog/o/storage/:splat 302

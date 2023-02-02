@@ -1,0 +1,79 @@
+/*
+ * Element defaults. The site is a terminal, so text is monospace at the chrome
+ * size by default; article text (prose.css) is the exception.
+ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+html {
+  background: var(--color-bg-page);
+  color: var(--color-text-primary);
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  padding-bottom: var(--statusbar-height);
+  font-family: var(--font-mono);
+  font-size: var(--text-chrome);
+  line-height: var(--leading);
+}
+
+a {
+  color: var(--color-link);
+  text-underline-offset: 0.2em;
+}
+
+@media (hover: hover) {
+  a:hover {
+    color: var(--color-link-hover);
+  }
+}
+
+:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}
+
+code,
+kbd,
+pre,
+samp {
+  font-family: var(--font-mono);
+}
+
+/* Inline code only; code blocks keep their syntax-highlighting theme */
+:not(pre) > code {
+  color: var(--color-text-code);
+}
+
+button,
+input {
+  color: inherit;
+  font: inherit;
+}
+
+input {
+  font-size: var(--text-base);
+}
+
+::selection {
+  background: var(--color-selection-bg);
+}
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}

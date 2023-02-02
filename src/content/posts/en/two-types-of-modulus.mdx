@@ -1,0 +1,98 @@
+---
+title: Two Types of Modulus
+date: 2021-02-15
+tags: [C, Python, modulus]
+---
+
+import ModDemo from "@/widgets/ModDemo.vue";
+
+## 0x00 Preface
+
+I've recently been studying discrete mathematics and getting into some basic number theory.
+
+While covering the [Extended Euclidean Algorithm](https://en.wikipedia.org/wiki/Extended_Euclidean_algorithm), I noticed that the modulo operation used in mathematics differs from the one most programming languages implement.
+
+I actually had the same question long ago, when I was learning Python (Python implements the mathematical version), but <del>because I'm lazy</del> I never looked into how the two kinds of modulo really work. Hence this post.
+
+## 0x01 The Problem
+
+If you've had the good fortune to learn both C and Python, you'll know that the modulo operator (%) works differently in the two languages. The difference shows up when an operand is **negative**.
+
+Take a look at these two examples:
+
+```c
+#include <stdio.h>
+int main(void)
+{
+    printf("%d", -8 % 7);
+    return 0;
+}
+```
+
+```python
+print(-8 % 7)
+```
+
+Both programs compute $-8 \bmod 7$, yet their results differ:
+
+- The C program prints $-1$
+- The Python program prints $6$
+
+Why is that? <del>(asking and answering my own question, how sad</del>
+
+## 0x02 The Cause
+
+C and Python use different definitions of modulo:
+
+- C uses the truncated modulus
+- Python uses the floor modulus
+
+The modulo operation is defined as:
+
+$$
+a \bmod b = a - b \cdot (a \backslash b)
+$$
+
+The two definitions interpret $a \backslash b$ differently:
+
+- The truncated modulus uses truncating integer division, which simply drops the fractional part and keeps the integer part
+- The floor modulus uses flooring integer division, which does a floating-point division first and then rounds the result down
+
+That's also where the two names come from.
+
+<Demo title="a mod b">
+  <ModDemo client:visible lang="en" />
+</Demo>
+
+## 0x03 Verifying the Results
+
+With these rules, we can check the C and Python code above.
+
+Compute $-8 \bmod 7$:
+
+$$
+-\frac{8}{7} \approx -1.142857
+$$
+
+Truncated modulus:
+
+$$
+-8 \bmod 7 = -8 - 7 \times (-8 \backslash 7) = -8 - 7 \times (-1) = -1
+$$
+
+Floor modulus:
+
+$$
+\lfloor-1.142857\rfloor = -2
+$$
+
+$$
+-8 \bmod 7 = -8 - 7 \times (-8 \backslash 7) = -8 - 7 \times (-2) = 6
+$$
+
+## 0x04 Notes
+
+1. Integer division in C and Python follows the matching definition:
+   - In C, `-8 / 7 == -1`
+   - In Python, `-8 // 7 == -2`
+2. Some sources don't call the truncated operation modulus at all. They call it remainder, to distinguish it from the floor modulus. (Some people also call the latter "true modulus".)

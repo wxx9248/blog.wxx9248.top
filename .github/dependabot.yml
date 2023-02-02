@@ -1,0 +1,30 @@
+# Weekly update pull requests, one per ecosystem for minor and patch updates;
+# major updates get their own. The cooldown skips releases younger than a day.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 1
+    ignore:
+      # Its major version follows Node's, set in .node-version.
+      - dependency-name: "@types/node"
+        update-types: ["version-update:semver-major"]
+      # Held at TypeScript 6.
+      - dependency-name: typescript
+        update-types: ["version-update:semver-major"]
+    groups:
+      npm:
+        update-types: [minor, patch]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 1
+    groups:
+      github-actions:
+        update-types: [minor, patch]

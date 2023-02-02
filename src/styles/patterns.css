@@ -1,0 +1,48 @@
+/* Small reusable patterns, each applied by class in the markup */
+
+/* A list without bullets or indent */
+.plain-list {
+  padding: 0;
+  list-style: none;
+}
+
+/* At least as tall as a fingertip on touch screens */
+.tap-target {
+  display: inline-flex;
+  min-height: var(--tap-min);
+  align-items: center;
+}
+
+/* A bordered text field, or a box that holds one */
+.field {
+  min-height: var(--tap-min);
+  padding: 0 var(--space-2);
+  border: 1px solid var(--color-border-input);
+  border-radius: var(--radius);
+  background: var(--color-bg-page);
+}
+
+.field:focus-within {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}
+
+/* A #tag */
+.tag {
+  color: var(--color-accent);
+}
+
+/* The "total N" line that starts `ls -l` output */
+.ls-total {
+  margin: var(--space-2) 0;
+  color: var(--color-text-muted);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

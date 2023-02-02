@@ -1,0 +1,68 @@
+---
+import { type Locale, localeInfo, locales } from "@/i18n/locales";
+import { postUrl, tagUrl } from "@/lib/navigation/routes";
+import type { Post } from "@/lib/posts/collection";
+import { formatDate } from "@/lib/posts/format";
+import { t } from "@/i18n/t";
+
+interface Props {
+  post: Post;
+  translations: Partial<Record<Locale, string>>;
+}
+
+const { post, translations } = Astro.props;
+const { lang } = post;
+const { date, tags, updated } = post.data;
+const translated = locales.filter((locale) => translations[locale]);
+---
+
+<p class="meta">
+  <time datetime={date.toISOString()}>{formatDate(date)}</time>
+  {updated && (
+    <span>· {t(lang, "post.updated", { date: formatDate(updated) })}</span>
+  )}
+  <span>· {t(lang, "post.readingTime", { minutes: post.readingMinutes })}</span>
+  {tags.length ? (
+    <span class="tags">
+      ·{" "}
+      {tags.map((tag) => (
+        <a class="tag" href={tagUrl(lang, tag)}>
+          #{tag}
+        </a>
+      ))}
+    </span>
+  ) : null}
+</p>
+{translated.length ? (
+  <p class="also">
+    {t(lang, "post.also")}{" "}
+    {translated.map((locale) => (
+      <a
+        href={postUrl(locale, translations[locale] ?? post.slug)}
+        hreflang={localeInfo[locale].htmlLang}
+        lang={localeInfo[locale].htmlLang}
+      >
+        {localeInfo[locale].label}
+      </a>
+    ))}
+  </p>
+) : null}
+
+<style>
+  .meta,
+  .also {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 1ch;
+    margin: 0 0 var(--space-2);
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--text-meta);
+  }
+
+  .tags {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 0 1ch;
+  }
+</style>

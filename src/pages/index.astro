@@ -1,0 +1,63 @@
+---
+import { defaultLocale, localeInfo, locales } from "@/i18n/locales";
+import Base from "@/layouts/Base.astro";
+import { homeUrl } from "@/lib/navigation/routes";
+import { rootRedirectScript } from "@/lib/language/root-redirect";
+import { t } from "@/i18n/t";
+
+const lang = defaultLocale;
+---
+
+<Base
+  canonicalPath="/"
+  context={{ kind: "unlocalized" }}
+  lang={lang}
+  statusLabel="~"
+>
+  <Fragment slot="head">
+    <script is:inline set:html={rootRedirectScript()} />
+    <noscript>
+      <meta http-equiv="refresh" content={`0; url=${homeUrl(defaultLocale)}`} />
+    </noscript>
+    <script is:inline>
+      document.documentElement.classList.add("js");
+    </script>
+  </Fragment>
+  <h1>{t(lang, "redirect.choose")}</h1>
+  <ul class="plain-list">
+    {locales.map((locale) => (
+      <li>
+        <a
+          class="tap-target"
+          href={homeUrl(locale)}
+          data-locale={locale}
+          hreflang={localeInfo[locale].htmlLang}
+          lang={localeInfo[locale].htmlLang}
+        >
+          cd ~/{locale} # {localeInfo[locale].label}
+        </a>
+      </li>
+    ))}
+  </ul>
+</Base>
+
+<style>
+  /*
+   * With JavaScript the page redirects at once, so it stays blank instead of
+   * flashing the chooser. If the redirect fails, the page appears after a delay.
+   */
+  :global(html.js body) {
+    visibility: hidden;
+    animation: reveal 0s 1.5s forwards;
+  }
+
+  @keyframes reveal {
+    to {
+      visibility: visible;
+    }
+  }
+
+  h1 {
+    font-size: var(--text-base);
+  }
+</style>

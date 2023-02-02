@@ -1,0 +1,25 @@
+/*
+ * Each page language picks its prose font, line height and text width from the
+ * tokens. Keyed to the page language only: short inline lang= labels, like the
+ * language switcher's, keep the look of the text around them.
+ */
+:root {
+  --font-prose: var(--font-prose-latin);
+  --leading-prose: var(--leading);
+  --measure: var(--measure-latin);
+}
+
+/* Chinese and Japanese read better with looser lines and a narrower column */
+:root:lang(zh),
+:root:lang(ja) {
+  --leading-prose: var(--leading-cjk);
+  --measure: var(--measure-cjk);
+}
+
+:root:lang(zh) {
+  --font-prose: var(--font-prose-zh);
+}
+
+:root:lang(ja) {
+  --font-prose: var(--font-prose-ja);
+}

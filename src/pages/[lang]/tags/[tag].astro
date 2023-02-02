@@ -1,0 +1,53 @@
+---
+import { type Locale, locales } from "@/i18n/locales";
+import { type Post, getTagIndex } from "@/lib/posts/collection";
+import { homeUrl, tagUrl } from "@/lib/navigation/routes";
+import Base from "@/layouts/Base.astro";
+import PostListing from "@/components/PostListing.astro";
+import type { TagGroup } from "@/lib/posts/tags";
+
+export async function getStaticPaths(): Promise<
+  {
+    params: { lang: Locale; tag: string };
+    props: Omit<Props, "lang">;
+  }[]
+> {
+  const indexes = await Promise.all(locales.map(getTagIndex));
+  return locales.flatMap((lang, position) =>
+    [...(indexes[position] ?? [])].map(([slug, group]) => ({
+      // The raw slug names the output folder; links percent-encode it
+      params: { lang, tag: slug },
+      props: {
+        group,
+        localesWithTag: locales.filter((_, other) => indexes[other]?.has(slug)),
+        slug
+      }
+    }))
+  );
+}
+
+interface Props {
+  group: TagGroup<Post>;
+  localesWithTag: Locale[];
+  slug: string;
+}
+
+const { group, localesWithTag, slug } = Astro.props;
+// The static paths above only produce locale params
+const lang = Astro.params.lang as Locale;
+---
+
+<Base
+  canonicalPath={tagUrl(lang, group.name)}
+  context={{ kind: "tag", lang, localesWithTag, slug }}
+  lang={lang}
+  statusLabel={`~/${lang}/tags/${slug}`}
+  title={`#${group.name}`}
+>
+  <PostListing
+    directory={`tags/${slug}/`}
+    lang={lang}
+    posts={group.items}
+    segments={[{ href: homeUrl(lang), label: lang }]}
+  />
+</Base>

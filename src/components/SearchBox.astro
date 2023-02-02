@@ -1,0 +1,94 @@
+---
+import type { Locale } from "@/i18n/locales";
+import { t } from "@/i18n/t";
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+---
+
+<form
+  class="search"
+  role="search"
+  data-search
+  data-unavailable={t(
+    lang,
+    // The build hint is for the author; readers get a plain message
+    import.meta.env.DEV ? "search.devNotice" : "search.unavailable"
+  )}
+  data-lang={lang}
+  data-no-results={t(lang, "search.noResults")}
+>
+  <label class="field">
+    <span class="visually-hidden">{t(lang, "nav.search")}</span>
+    <span class="sigil" aria-hidden="true">
+      $
+    </span>
+    <input
+      type="search"
+      autocomplete="off"
+      enterkeyhint="search"
+      placeholder={t(lang, "search.placeholder")}
+    />
+  </label>
+  <p class="status" data-search-status aria-live="polite"></p>
+  <ol class="results plain-list" data-search-results></ol>
+</form>
+
+<script>
+  import "@/scripts/search/box";
+</script>
+
+<style>
+  .field {
+    display: flex;
+    align-items: center;
+    gap: 1ch;
+  }
+
+  .sigil {
+    color: var(--color-accent);
+  }
+
+  /* The field around it draws the border and the focus ring */
+  input {
+    flex: 1;
+    min-width: 0;
+    border: 0;
+    background: none;
+    outline: none;
+  }
+
+  .status {
+    min-height: 1.5em;
+    color: var(--color-text-muted);
+  }
+
+  .results :global(li) {
+    margin-bottom: var(--space-4);
+  }
+
+  .results :global(.path) {
+    color: var(--color-accent);
+  }
+
+  .results :global(.title) {
+    color: var(--color-text-primary);
+    font-weight: 700;
+  }
+
+  .results :global(.excerpt) {
+    margin: var(--space-1) 0 0;
+    color: var(--color-text-muted);
+    font-family: var(--font-prose);
+    overflow-wrap: anywhere;
+  }
+
+  .results :global(mark) {
+    background: none;
+    color: var(--color-text-highlight);
+    font-weight: 700;
+  }
+</style>

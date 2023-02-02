@@ -1,0 +1,53 @@
+---
+import { isLocale } from "@/i18n/locales";
+import { t } from "@/i18n/t";
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+const { lang } = Astro.params;
+if (!isLocale(lang)) {
+  throw new Error("<Demo> can only be used on a language route");
+}
+---
+
+<figure class="demo" data-demo>
+  <figcaption>
+    <span class="label">{t(lang, "demo.label")}</span>
+    <span class="title">{title}</span>
+  </figcaption>
+  <div class="body">
+    <slot />
+  </div>
+</figure>
+
+<style>
+  /* Interactive widgets in a post: terminal text inside the prose */
+  .demo {
+    margin: var(--space-6) 0;
+    border: 1px dashed var(--color-accent);
+    border-radius: var(--radius);
+    font-family: var(--font-mono);
+    font-size: var(--text-chrome);
+  }
+
+  figcaption {
+    display: flex;
+    gap: 1ch;
+    padding: var(--space-1) var(--space-3);
+    border-bottom: 1px dashed var(--color-accent);
+    font-size: var(--text-meta);
+  }
+
+  .label {
+    color: var(--color-accent);
+  }
+
+  /* Widgets can size themselves with container queries against this box */
+  .body {
+    padding: var(--space-3);
+    container-type: inline-size;
+  }
+</style>

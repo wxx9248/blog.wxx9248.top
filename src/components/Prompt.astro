@@ -1,0 +1,64 @@
+---
+import { site } from "@/config/site";
+
+export interface PromptSegment {
+  href?: string;
+  label: string;
+}
+
+interface Props {
+  // Plain-text command; pass markup through the default slot instead
+  command?: string;
+  segments: readonly PromptSegment[];
+}
+
+const { command = "", segments } = Astro.props;
+---
+
+<!-- Kept on one line: whitespace between these spans would render as gaps -->
+<!-- prettier-ignore -->
+<p class="prompt"><span class="host"><span class="identity">{site.prompt.user}@{site.prompt.host}</span><span class="punctuation">:</span></span><span class="path">~{segments.map(({ href, label }) => <>/{href ? <a href={href}>{label}</a> : label}</>)}</span><span class="punctuation dollar">$</span><span class="command" data-prompt-command>{Astro.slots.has("default") ? <slot /> : command}</span></p>
+
+<style>
+  .prompt {
+    display: flex;
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  .host,
+  .dollar {
+    flex: none;
+  }
+
+  .dollar {
+    margin-inline-end: 1ch;
+  }
+
+  .identity {
+    color: var(--color-accent);
+  }
+
+  .punctuation {
+    color: var(--color-text-muted);
+  }
+
+  .path {
+    min-width: 1ch;
+    overflow: hidden;
+    flex-shrink: 100;
+    color: var(--color-text-highlight);
+    text-overflow: ellipsis;
+  }
+
+  .path a {
+    color: inherit;
+  }
+
+  .command {
+    min-width: 0;
+    flex-shrink: 1;
+    overflow-wrap: anywhere;
+    white-space: normal;
+  }
+</style>

@@ -1,0 +1,74 @@
+---
+import LanguageSwitcher from "./LanguageSwitcher.astro";
+import type { LanguageTargets } from "@/lib/language/targets";
+import type { Locale } from "@/i18n/locales";
+import { siteLinks } from "@/lib/navigation/site-links";
+import { t } from "@/i18n/t";
+
+interface Props {
+  lang: Locale;
+  targets: LanguageTargets;
+}
+
+const { lang, targets } = Astro.props;
+---
+
+<div id="site-menu" class="site-menu" popover>
+  <nav aria-label={t(lang, "nav.menu")}>
+    <ul class="links plain-list">
+      {siteLinks(lang).map(({ href, label }) => (
+        <li>
+          <a class="tap-target" href={href}>
+            ▸ {t(lang, label)}
+          </a>
+        </li>
+      ))}
+    </ul>
+    <p class="heading">{t(lang, "nav.language")}</p>
+    <LanguageSwitcher lang={lang} targets={targets} variant="labels" />
+  </nav>
+  <button
+    type="button"
+    class="close tap-target"
+    popovertarget="site-menu"
+    popovertargetaction="hide"
+  >
+    ✕ {t(lang, "nav.close")}
+  </button>
+</div>
+
+<style>
+  .site-menu {
+    inset: auto 0 var(--statusbar-height) 0;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: var(--space-4);
+    border: 0;
+    border-top: 1px solid var(--color-border-default);
+    background: var(--color-bg-raised);
+    color: var(--color-text-primary);
+  }
+
+  .links {
+    margin: 0 0 var(--space-2);
+  }
+
+  .links a {
+    color: inherit;
+  }
+
+  .heading {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: var(--text-label);
+    text-transform: uppercase;
+  }
+
+  .close {
+    margin-top: var(--space-2);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius);
+    background: none;
+  }
+</style>

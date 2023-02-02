@@ -1,0 +1,92 @@
+---
+import { type Locale, localeInfo, locales } from "@/i18n/locales";
+import type { LanguageTargets } from "@/lib/language/targets";
+import { t } from "@/i18n/t";
+
+interface Props {
+  lang: Locale;
+  targets: LanguageTargets;
+  // "codes" for the compact status bar, "labels" for the menu
+  variant: "codes" | "labels";
+}
+
+const { lang, targets, variant } = Astro.props;
+---
+
+<ul class:list={["language-switcher", "plain-list", variant]}>
+  {locales.map((locale) => {
+    const { available, current, href } = targets[locale];
+    const { htmlLang, label } = localeInfo[locale];
+    return (
+      <li>
+        <a
+          href={href}
+          hreflang={htmlLang}
+          lang={htmlLang}
+          aria-current={current ? "true" : null}
+          class:list={{
+            current,
+            "tap-target": variant === "labels",
+            "unavailable": !available
+          }}
+          title={
+            available ? null : t(lang, "post.noTranslation", { lang: label })
+          }
+          data-locale={locale}
+        >
+          {variant === "codes" ? (
+            <>
+              <span aria-hidden="true">{locale}</span>
+              <span class="visually-hidden">{label}</span>
+            </>
+          ) : (
+            label
+          )}
+        </a>
+      </li>
+    );
+  })}
+</ul>
+
+<script>
+  import { localeCookie } from "@/i18n/locales";
+
+  // Remember the choice so the "/" redirect sends the reader here next time
+  document.addEventListener("click", (event) => {
+    const link =
+      event.target instanceof Element
+        ? event.target.closest<HTMLAnchorElement>("a[data-locale]")
+        : null;
+    const locale = link?.dataset.locale;
+    if (locale) {
+      document.cookie = `${localeCookie.name}=${encodeURIComponent(locale)}; Path=/; Max-Age=${localeCookie.maxAgeSeconds}; SameSite=Lax`;
+    }
+  });
+</script>
+
+<style>
+  .language-switcher {
+    display: flex;
+    gap: var(--space-2);
+    margin: 0;
+  }
+
+  /* Stacked tap targets, spaced like the menu links above them */
+  .labels {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  .current {
+    font-weight: 700;
+  }
+
+  /* Struck through rather than faded, so the text keeps its contrast */
+  .unavailable {
+    text-decoration-line: line-through;
+  }
+</style>

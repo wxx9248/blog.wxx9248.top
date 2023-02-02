@@ -1,0 +1,23 @@
+/* Shared by the widgets: labelled inputs above a list of results */
+label {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.results {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-1) 2ch;
+  margin: var(--space-3) 0 0;
+}
+
+dd {
+  margin: 0;
+  color: var(--color-text-highlight);
+  font-weight: 700;
+}
+
+.message {
+  margin: var(--space-3) 0 0;
+  color: var(--color-text-muted);
+}

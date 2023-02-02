@@ -1,0 +1,23 @@
+/*
+ * The site-wide stylesheet, from the most general layer to the most specific.
+ * Component <style> blocks stay unlayered, so they override every layer here.
+ *
+ *   vendor    third-party styles (KaTeX)
+ *   tokens    design values only
+ *   base      element defaults
+ *   language  per-language fonts, line height and text width
+ *   layout    the page column
+ *   prose     article text
+ *   patterns  reusable classes
+ */
+@layer vendor, tokens, base, language, layout, prose, patterns;
+
+/* Breakpoint definitions only; Lightning CSS needs them outside any layer */
+@import "./media.css";
+@import "katex/dist/katex.min.css" layer(vendor);
+@import "./tokens.css" layer(tokens);
+@import "./base.css" layer(base);
+@import "./language.css" layer(language);
+@import "./layout.css" layer(layout);
+@import "./prose.css" layer(prose);
+@import "./patterns.css" layer(patterns);
