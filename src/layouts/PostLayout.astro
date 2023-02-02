@@ -1,0 +1,77 @@
+---
+import { homeUrl, postUrl } from "@/lib/navigation/routes";
+import Base from "./Base.astro";
+import type { Locale } from "@/i18n/locales";
+import type { Neighbors } from "@/lib/posts/graph";
+import type { Post } from "@/lib/posts/collection";
+import PostComments from "@/components/PostComments.astro";
+import PostMeta from "@/components/PostMeta.astro";
+import PostNav from "@/components/PostNav.astro";
+
+interface Props {
+  neighbors: Neighbors<Post>;
+  post: Post;
+  translations: Partial<Record<Locale, string>>;
+}
+
+const { neighbors, post, translations } = Astro.props;
+const { lang, slug } = post;
+---
+
+<Base
+  canonicalPath={postUrl(lang, slug)}
+  context={{ kind: "post", lang, slug, translations }}
+  description={post.summary}
+  lang={lang}
+  prompt={{
+    command: `cat ${post.fileName}`,
+    segments: [
+      { href: homeUrl(lang), label: lang },
+      { href: homeUrl(lang), label: "posts" }
+    ]
+  }}
+  showProgress
+  statusLabel={post.fileName}
+  title={post.data.title}
+>
+  <article
+    class="post prose"
+    data-pagefind-body
+    data-pagefind-filter={`lang:${lang}`}
+  >
+    <h1>{post.data.title}</h1>
+    <PostMeta post={post} translations={translations} />
+    <slot />
+  </article>
+  <PostNav neighbors={neighbors} post={post} />
+  <PostComments lang={lang} />
+</Base>
+
+<style>
+  /* Headings in the light cyan, as on www.wxx9248.top */
+  h1 {
+    margin: var(--space-4) 0 var(--space-2);
+    color: var(--color-text-heading);
+    font-size: var(--text-title);
+    line-height: 1.3;
+  }
+
+  .post :global(h2),
+  .post :global(h3),
+  .post :global(h4) {
+    margin: var(--space-8) 0 var(--space-3);
+    color: var(--color-text-heading);
+    line-height: 1.35;
+  }
+
+  .post :global(:is(h2, h3, h4) > a) {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .post :global(.heading-marker) {
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+    font-weight: 400;
+  }
+</style>

@@ -1,0 +1,3 @@
+# Giscus loads its theme with crossorigin="anonymous" from its own origin.
+/giscus/*
+  Access-Control-Allow-Origin: https://giscus.app

@@ -1,0 +1,10 @@
+{
+  // Static assets only: there is no "main", so Cloudflare never starts a Worker
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "blog",
+  "compatibility_date": "2026-11-03",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page"
+  }
+}

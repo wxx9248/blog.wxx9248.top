@@ -1,0 +1,108 @@
+@import "./tokens.css";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--color-bg-page);
+  color: var(--color-text-primary);
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  padding-bottom: var(--statusbar-height);
+  background: var(--color-bg-page);
+  color: var(--color-text-primary);
+  font-family: var(--font-prose);
+  font-size: var(--text-body);
+  line-height: 1.7;
+}
+
+/*
+ * Chinese and Japanese pages read better with looser lines. Keyed to the page
+ * language only: short inline lang= labels (like the language switcher's
+ * codes) must keep the line height of the text around them.
+ */
+:root:lang(zh) body,
+:root:lang(ja) body {
+  line-height: 1.85;
+}
+
+a {
+  color: var(--color-link);
+  text-underline-offset: 0.2em;
+}
+
+@media (hover: hover) {
+  a:hover {
+    color: var(--color-link-hover);
+  }
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+
+code,
+kbd,
+pre,
+samp {
+  font-family: var(--font-mono);
+}
+
+/* Inline code only; code blocks keep their syntax-highlighting theme */
+:not(pre) > code {
+  color: var(--color-text-code);
+}
+
+::selection {
+  background: var(--color-selection-bg);
+}
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+.page {
+  max-width: var(--page-max);
+  margin-inline: auto;
+  padding: var(--space-4);
+}
+
+.prose {
+  max-width: var(--measure-latin);
+  overflow-wrap: anywhere;
+}
+
+.prose:lang(zh),
+.prose:lang(ja) {
+  max-width: var(--measure-cjk);
+}
+
+/* Wide content scrolls inside its own box so the page never does */
+.prose pre,
+.prose .katex-display {
+  overflow-x: auto;
+}
+
+.prose table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

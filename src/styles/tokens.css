@@ -1,0 +1,64 @@
+/*
+ * Design tokens: the only place fonts and sizes are defined. Colors are the
+ * --color-* semantic tokens from @wxx9248/colors. Each is light-dark(); the
+ * active theme comes from color-scheme, which follows the system unless the
+ * reader picked a theme (data-theme on <html>).
+ */
+@import "@wxx9248/colors/index.css";
+@import "./media.css";
+
+:root {
+  --font-mono:
+    "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --font-prose:
+    system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
+    "PingFang SC", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
+
+  /* Type scale */
+  --text-body: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  --text-label: 0.75rem;
+  --text-meta: 0.8125rem;
+  --text-chrome: 0.875rem;
+  --text-base: 1rem;
+  --text-entry: 1.0625rem;
+  --text-title: 1.75rem;
+
+  --measure-latin: 72ch;
+  --measure-cjk: 40em;
+  --page-max: 56rem;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --radius: 4px;
+
+  --tap-min: 44px;
+  --statusbar-height: calc(var(--tap-min) + env(safe-area-inset-bottom));
+
+  --z-statusbar: 10;
+  --z-menu: 20;
+  --z-progress: 30;
+}
+
+@media (--tablet-up) {
+  :root {
+    --statusbar-height: 1.75rem;
+  }
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+:lang(ja) {
+  --font-prose:
+    system-ui, -apple-system, "Segoe UI", "Hiragino Sans", "Noto Sans CJK JP",
+    "Yu Gothic", Meiryo, sans-serif;
+}

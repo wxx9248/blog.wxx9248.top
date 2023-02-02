@@ -1,0 +1,35 @@
+---
+import type { Locale } from "@/i18n/locales";
+import { site } from "@/config/site";
+import { t } from "@/i18n/t";
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+---
+
+{site.giscus && (
+  <section class="comments" aria-labelledby="comments-heading">
+    <h2 id="comments-heading">{t(lang, "post.comments")}</h2>
+    <div data-giscus-mount data-lang={lang} />
+  </section>
+)}
+
+<script>
+  import "@/scripts/giscus/embed";
+</script>
+
+<style>
+  .comments {
+    margin-top: var(--space-8);
+  }
+
+  h2 {
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--text-chrome);
+    font-weight: 400;
+  }
+</style>

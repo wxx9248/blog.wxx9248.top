@@ -1,0 +1,72 @@
+---
+import { type Locale, localeStaticPaths } from "@/i18n/locales";
+import { homeUrl, tagUrl, tagsUrl } from "@/lib/navigation/routes";
+import Base from "@/layouts/Base.astro";
+import { getTagIndex } from "@/lib/posts/collection";
+import { t } from "@/i18n/t";
+
+export const getStaticPaths = localeStaticPaths;
+
+// The static paths above only produce locale params
+const lang = Astro.params.lang as Locale;
+const tags = await getTagIndex(lang);
+---
+
+<Base
+  canonicalPath={tagsUrl(lang)}
+  context={{ kind: "tags", lang }}
+  lang={lang}
+  prompt={{
+    command: "ls tags/",
+    segments: [{ href: homeUrl(lang), label: lang }]
+  }}
+  statusLabel={`~/${lang}/tags`}
+  title={t(lang, "nav.tags")}
+>
+  <p class="total">total {tags.size}</p>
+  <ul class="tags">
+    {[...tags.values()].map(({ items, name }) => (
+      <li>
+        <a href={tagUrl(lang, name)}>#{name}</a>
+        <span class="count">
+          {t(lang, "tags.count", { count: items.length })}
+        </span>
+      </li>
+    ))}
+  </ul>
+</Base>
+
+<style>
+  .total,
+  .tags {
+    font-family: var(--font-mono);
+    font-size: var(--text-chrome);
+  }
+
+  .total {
+    color: var(--color-text-muted);
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-6);
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    display: flex;
+    min-height: var(--tap-min);
+    align-items: center;
+    gap: 1ch;
+  }
+
+  a {
+    color: var(--color-accent);
+  }
+
+  .count {
+    color: var(--color-text-muted);
+  }
+</style>

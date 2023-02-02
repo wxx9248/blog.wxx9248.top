@@ -1,0 +1,39 @@
+---
+import type { Locale } from "@/i18n/locales";
+import { licenseUrl } from "@/lib/navigation/routes";
+import { site } from "@/config/site";
+import { t } from "@/i18n/t";
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+const buildYear = new Date().getFullYear();
+const license = t(lang, "footer.license", {
+  licenseName: site.license.name,
+  licenseUrl: licenseUrl(lang)
+});
+---
+
+<footer class="site-footer">
+  <p set:html={license} />
+  <p>
+    © {site.author} {site.copyrightStartYear}–{buildYear}
+  </p>
+</footer>
+
+<style>
+  .site-footer {
+    max-width: var(--page-max);
+    margin-inline: auto;
+    padding: var(--space-6) var(--space-4);
+    border-top: 1px solid var(--color-border-subtle);
+    color: var(--color-text-muted);
+    font-size: var(--text-meta);
+  }
+
+  p {
+    margin: 0 0 var(--space-1);
+  }
+</style>

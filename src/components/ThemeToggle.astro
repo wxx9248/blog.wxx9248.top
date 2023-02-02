@@ -1,0 +1,27 @@
+---
+import type { Locale } from "@/i18n/locales";
+import { t } from "@/i18n/t";
+
+interface Props {
+  lang: Locale;
+}
+
+const { lang } = Astro.props;
+---
+
+<button
+  type="button"
+  class="theme-toggle"
+  aria-label={t(lang, "theme.toggle")}
+  data-theme-toggle
+>
+  <span aria-hidden="true">◐</span>
+</button>
+
+<script>
+  import { toggleTheme } from "@/scripts/theme";
+
+  for (const button of document.querySelectorAll("[data-theme-toggle]")) {
+    button.addEventListener("click", () => toggleTheme());
+  }
+</script>

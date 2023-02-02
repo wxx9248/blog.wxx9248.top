@@ -1,0 +1,27 @@
+---
+import { type Locale, localeStaticPaths } from "@/i18n/locales";
+import Base from "@/layouts/Base.astro";
+import PostListing from "@/components/PostListing.astro";
+import { getPosts } from "@/lib/posts/collection";
+import { homeUrl } from "@/lib/navigation/routes";
+
+export const getStaticPaths = localeStaticPaths;
+
+// The static paths above only produce locale params
+const lang = Astro.params.lang as Locale;
+const posts = await getPosts(lang);
+---
+
+<Base
+  canonicalPath={homeUrl(lang)}
+  context={{ kind: "home", lang }}
+  lang={lang}
+  statusLabel={`~/${lang}/posts`}
+>
+  <PostListing
+    directory="posts/"
+    lang={lang}
+    posts={posts}
+    segments={[{ href: homeUrl(lang), label: lang }]}
+  />
+</Base>

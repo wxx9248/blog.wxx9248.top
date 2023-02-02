@@ -1,0 +1,112 @@
+---
+import "@fontsource/jetbrains-mono/latin-400.css";
+import "@fontsource/jetbrains-mono/latin-700.css";
+import "katex/dist/katex.min.css";
+import "@/styles/global.css";
+import { type Locale, localeInfo } from "@/i18n/locales";
+import {
+  type PageContext,
+  alternateLinks,
+  languageTargets
+} from "@/lib/language/targets";
+import Prompt, { type PromptSegment } from "@/components/Prompt.astro";
+import {
+  absoluteUrl,
+  rssUrl,
+  searchFocusHash,
+  searchUrl
+} from "@/lib/navigation/routes";
+import { initTheme, themeStorageKey } from "@/scripts/theme";
+import SiteFooter from "@/components/SiteFooter.astro";
+import SiteMenu from "@/components/SiteMenu.astro";
+import StatusBar from "@/components/StatusBar.astro";
+import { site } from "@/config/site";
+
+interface Props {
+  canonicalPath: string;
+  context: PageContext;
+  description?: string;
+  lang: Locale;
+  // Pages that render their own prompt lines leave this out
+  prompt?: { command: string; segments: PromptSegment[] };
+  showProgress?: boolean;
+  statusLabel: string;
+  // Omitted on home pages, whose title is just the site title
+  title?: string;
+}
+
+const {
+  canonicalPath,
+  context,
+  description = site.title,
+  lang,
+  prompt,
+  showProgress = false,
+  statusLabel,
+  title
+} = Astro.props;
+
+const targets = languageTargets(context);
+const alternates = alternateLinks(targets);
+const themeScript = `(${initTheme.toString()})(${JSON.stringify(themeStorageKey)});`;
+---
+
+<!doctype html>
+<html lang={localeInfo[lang].htmlLang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta name="color-scheme" content="light dark" />
+    <title>{title ? `${title} · ${site.title}` : site.title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={absoluteUrl(canonicalPath)} />
+    {alternates.map(({ href, locale }) => (
+      <link
+        rel="alternate"
+        hreflang={localeInfo[locale].htmlLang}
+        href={absoluteUrl(href)}
+      />
+    ))}
+    <link rel="alternate" hreflang="x-default" href={absoluteUrl("/")} />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={site.title}
+      href={rssUrl(lang)}
+    />
+    <script is:inline set:html={themeScript} />
+    <slot name="head" />
+  </head>
+  <body data-search-url={`${searchUrl(lang)}${searchFocusHash}`}>
+    {prompt && (
+      <header class="page-header">
+        <Prompt {...prompt} />
+      </header>
+    )}
+    <main class="page">
+      <slot />
+    </main>
+    <SiteFooter lang={lang} />
+    <StatusBar
+      label={statusLabel}
+      lang={lang}
+      showProgress={showProgress}
+      targets={targets}
+    />
+    <SiteMenu lang={lang} targets={targets} />
+    <script>
+      import "@/scripts/search/shortcut";
+    </script>
+  </body>
+</html>
+
+<style>
+  .page-header {
+    max-width: var(--page-max);
+    margin-inline: auto;
+    padding: var(--space-4) var(--space-4) 0;
+  }
+</style>

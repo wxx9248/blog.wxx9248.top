@@ -1,0 +1,3 @@
+/* The only place viewport breakpoints are defined; import this file to use them */
+@custom-media --tablet-up (width >= 40rem);
+@custom-media --desktop-up (width >= 64rem);
