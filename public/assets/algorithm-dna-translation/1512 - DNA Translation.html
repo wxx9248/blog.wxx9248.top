@@ -1,0 +1,823 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=utf-8">
+</head>
+
+<body lang=en-ca style='tab-interval:36.0pt'>
+
+<div class=WordSection1>
+
+<p align=center style='margin-top:7.5pt;margin-right:0cm;
+margin-bottom:7.5pt;margin-left:0cm;text-align:center;line-height:30.0pt;
+mso-pagination:widow-orphan;mso-outline-level:2'><b><span style='font-size:
+22.5pt;font-family:"inherit",serif;mso-fareast-font-family:"Times New Roman";
+mso-bidi-font-family:Helvetica;color:#333333'>1512: DNA Translation<o:p></o:p></span></b></p>
+
+<p align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
+text-align:center;line-height:normal;mso-pagination:widow-orphan'><b><span
+style='font-size:10.5pt;font-family:"Helvetica",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:#333333'>Time Limit:&nbsp;</span></b><span
+style='font-size:10.5pt;font-family:"Helvetica",sans-serif;mso-fareast-font-family:
+"Times New Roman";color:#333333'>1 Sec&nbsp;&nbsp;<b>Memory Limit:&nbsp;</b>64
+MB<br>
+
+<p align=left style='margin-top:7.5pt;margin-right:0cm;
+margin-bottom:7.5pt;margin-left:0cm;text-align:left;line-height:30.0pt;
+mso-pagination:widow-orphan;mso-outline-level:2'><b><span style='font-size:
+22.5pt;font-family:"Helvetica",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:#333333'>Description<o:p></o:p></span></b></p>
+
+<p align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+text-align:left;line-height:normal;mso-pagination:widow-orphan'><span
+style='font-size:12.0pt;font-family:"Times New Roman",serif;mso-fareast-font-family:
+"Times New Roman";color:#333333'>Deoxyribonucleic acid (DNA) is composed of a
+sequence of nucleotide bases paired together to form a double-stranded helix
+structure. Through a series of complex biochemical processes the nucleotide
+sequences in an organism's DNA are translated into the proteins it requires for
+life. The object of this problem is to write a computer program which accepts a
+DNA strand and reports the protein generated, if any, from the DNA strand.<br>
+<br>
+The nucleotide bases from which DNA is built are adenine, cytosine, guanine, and
+thymine (hereafter referred to as A, C, G, and T, respectively). These bases
+bond together in a chain to form half of a DNA strand. The other half of the
+DNA strand is a similar chain, but each nucleotide is replaced by its
+complementary base. The bases A and T are complementary, as are the bases C and
+G. These two &quot;half-strands&quot; of DNA are then bonded by the pairing of
+the complementary bases to form a strand of DNA.<br>
+<br>
+Typically a DNA strand is listed by simply writing down the bases which form
+the primary strand (the complementary strand can always be created by writing
+the complements of the bases in the primary strand). For example, the sequence
+TACTCGTAATTCACT represents a DNA strand whose complement would be
+ATGAGCATTAAGTGA. Note that A is always paired with T, and C is always paired
+with G.<br>
+<br>
+From a primary strand of DNA, a strand of ribonucleic acid (RNA) known as
+messenger RNA (mRNA for short) is produced in a process known as transcription.
+The transcribed mRNA is identical to the complementary DNA strand with the
+exception that thymine is replaced by a nucleotide known as uracil (hereafter
+referred to as U). For example, the mRNA strand for the DNA in the previous
+paragraph would be AUGAGCAUUAAGUGA.<br>
+<br>
+It is the sequence of bases in the mRNA which determines the protein that will
+be synthesized. The bases in the mRNA can be viewed as a collection of codons,
+each codon having exactly three bases. The codon AUG marks the start of a
+protein sequence, and any of the codons UAA, UAG, or UGA marks the end of the
+sequence. The one or more codons between the start and termination codons
+represent the sequence of amino acids to be synthesized to form a protein. For
+example, the mRNA codon AGC corresponds to the amino acid serine (Ser), AUU
+corresponds to isoleucine (Ile), and AAG corresponds to lysine (Lys). So, the
+protein formed from the example mRNA in the previous paragraph is, in its
+abbreviated form, Ser-Ile-Lys.<br>
+<br>
+The complete genetic code from which codons are translated into amino acids is
+shown in the table below (note that only the amino acid abbreviations are
+shown). It should also be noted that the sequence AUG, which has already been
+identified as the start sequence, can also correspond to the amino acid
+methionine (Met). So, the first AUG in a mRNA strand is the start sequence, but
+subsequent AUG codons are translated normally into the Met amino acid.<o:p></o:p></span></p>
+
+<div align=center>
+	
+<table class=MsoNormalTable border=1 cellspacing=0 cellpadding=0
+ style='background:#EEEEEE;border-collapse:collapse;border:none'>
+ <tr style='height:22.5pt'>
+  <td rowspan=2 style='border-top:solid #DDDDDD 1.0pt;border-left:solid #DDDDDD 1.0pt;
+  border-bottom:none;border-right:none;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><i><span style='font-size:12.0pt;
+  font-family:"Times New Roman",serif'>First base in codon</span></i></p>
+  </td>
+  <td colspan=4 style='border-top:solid #DDDDDD 1.0pt;border-left:solid #DDDDDD 1.0pt;
+  border-bottom:none;border-right:none;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:center;line-height:normal'><i><span style='font-size:12.0pt;
+  font-family:"Times New Roman",serif;color:black'>Second base in codon</span></i></p>
+  </td>
+  <td rowspan=2 style='border:solid #DDDDDD 1.0pt;border-bottom:none;
+  padding:2.25pt 2.25pt 2.25pt 2.25pt;height:22.5pt'>
+  <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:center;line-height:normal'><i><span style='font-size:12.0pt;
+  font-family:"Times New Roman",serif;color:black'>Third base in codon</span></i></p>
+  </td>
+ </tr>
+ <tr style='height:22.5pt'>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><b><span style='font-size:12.0pt;
+  font-family:"Times New Roman",serif;color:black'>U</span></b></p>
+  </td>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><b><span style='font-size:12.0pt;
+  font-family:"Times New Roman",serif;color:black'>C</span></b></p>
+  </td>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><b><span style='font-size:12.0pt;
+  font-family:"Times New Roman",serif;color:black'>A</span></b></p>
+  </td>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><b><span style='font-size:12.0pt;
+  font-family:"Times New Roman",serif;color:black'>G</span></b></p>
+  </td>
+ </tr>
+ <tr style='height:22.5pt'>
+  <td rowspan=4 style='border:none;border-left:solid #DDDDDD 1.0pt;padding:
+  2.25pt 2.25pt 2.25pt 2.25pt;height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><b><span style='font-size:12.0pt;
+  font-family:"Times New Roman",serif;color:black'>U</span></b></p>
+  </td>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>Phe</span></p>
+  </td>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>Ser</span></p>
+  </td>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>Tyr</span></p>
+  </td>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>Cys</span></p>
+  </td>
+  <td style='border-top:none;border-left:solid #DDDDDD 1.0pt;border-bottom:
+  none;border-right:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:center;line-height:normal'><b><span style='font-size:12.0pt;
+  font-family:"Times New Roman",serif;color:black'>U</span></b></p>
+  </td>
+ </tr>
+ <tr style='height:22.5pt'>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>Phe</span></p>
+  </td>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>Ser</span></p>
+  </td>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>Tyr</span></p>
+  </td>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>Cys</span></p>
+  </td>
+  <td style='border-top:none;border-left:solid #DDDDDD 1.0pt;border-bottom:
+  none;border-right:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:center;line-height:normal'><b><span style='font-size:12.0pt;
+  font-family:"Times New Roman",serif;color:black'>C</span></b></p>
+  </td>
+ </tr>
+ <tr style='height:22.5pt'>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>Leu</span></p>
+  </td>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>Ser</span></p>
+  </td>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>---</span></p>
+  </td>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>---</span></p>
+  </td>
+  <td style='border-top:none;border-left:solid #DDDDDD 1.0pt;border-bottom:
+  none;border-right:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:center;line-height:normal'><b><span style='font-size:12.0pt;
+  font-family:"Times New Roman",serif;color:black'>A</span></b></p>
+  </td>
+ </tr>
+ <tr style='height:22.5pt'>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>Leu</span></p>
+  </td>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>Ser</span></p>
+  </td>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>---</span></p>
+  </td>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>Trp</span></p>
+  </td>
+  <td style='border-top:none;border-left:solid #DDDDDD 1.0pt;border-bottom:
+  none;border-right:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:center;line-height:normal'><b><span style='font-size:12.0pt;
+  font-family:"Times New Roman",serif;color:black'>G</span></b></p>
+  </td>
+ </tr>
+ <tr style='height:22.5pt'>
+  <td rowspan=4 style='border:none;border-left:solid #DDDDDD 1.0pt;padding:
+  2.25pt 2.25pt 2.25pt 2.25pt;height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><b><span style='font-size:12.0pt;
+  font-family:"Times New Roman",serif;color:black'>C</span></b></p>
+  </td>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>Leu</span></p>
+  </td>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>Pro</span></p>
+  </td>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>His</span></p>
+  </td>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>Arg</span></p>
+  </td>
+  <td style='border-top:none;border-left:solid #DDDDDD 1.0pt;border-bottom:
+  none;border-right:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:center;line-height:normal'><b><span style='font-size:12.0pt;
+  font-family:"Times New Roman",serif;color:black'>U</span></b></p>
+  </td>
+ </tr>
+ <tr style='height:22.5pt'>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>Leu</span></p>
+  </td>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>Pro</span></p>
+  </td>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>His</span></p>
+  </td>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>Arg</span></p>
+  </td>
+  <td style='border-top:none;border-left:solid #DDDDDD 1.0pt;border-bottom:
+  none;border-right:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:center;line-height:normal'><b><span style='font-size:12.0pt;
+  font-family:"Times New Roman",serif;color:black'>C</span></b></p>
+  </td>
+ </tr>
+ <tr style='height:22.5pt'>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>Leu</span></p>
+  </td>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>Pro</span></p>
+  </td>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>Gln</span></p>
+  </td>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>Arg</span></p>
+  </td>
+  <td style='border-top:none;border-left:solid #DDDDDD 1.0pt;border-bottom:
+  none;border-right:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:center;line-height:normal'><b><span style='font-size:12.0pt;
+  font-family:"Times New Roman",serif;color:black'>A</span></b></p>
+  </td>
+ </tr>
+ <tr style='height:22.5pt'>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>Leu</span></p>
+  </td>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>Pro</span></p>
+  </td>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>Gln</span></p>
+  </td>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>Arg</span></p>
+  </td>
+  <td style='border-top:none;border-left:solid #DDDDDD 1.0pt;border-bottom:
+  none;border-right:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:center;line-height:normal'><b><span style='font-size:12.0pt;
+  font-family:"Times New Roman",serif;color:black'>G</span></b></p>
+  </td>
+ </tr>
+ <tr style='height:22.5pt'>
+  <td rowspan=4 style='border:none;border-left:solid #DDDDDD 1.0pt;padding:
+  2.25pt 2.25pt 2.25pt 2.25pt;height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><b><span style='font-size:12.0pt;
+  font-family:"Times New Roman",serif;color:black'>A</span></b></p>
+  </td>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>Ile</span></p>
+  </td>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>Thr</span></p>
+  </td>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>Asn</span></p>
+  </td>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>Ser</span></p>
+  </td>
+  <td style='border-top:none;border-left:solid #DDDDDD 1.0pt;border-bottom:
+  none;border-right:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:center;line-height:normal'><b><span style='font-size:12.0pt;
+  font-family:"Times New Roman",serif;color:black'>U</span></b></p>
+  </td>
+ </tr>
+ <tr style='height:22.5pt'>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>Ile</span></p>
+  </td>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>Thr</span></p>
+  </td>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>Asn</span></p>
+  </td>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>Ser</span></p>
+  </td>
+  <td style='border-top:none;border-left:solid #DDDDDD 1.0pt;border-bottom:
+  none;border-right:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:center;line-height:normal'><b><span style='font-size:12.0pt;
+  font-family:"Times New Roman",serif;color:black'>C</span></b></p>
+  </td>
+ </tr>
+ <tr style='height:22.5pt'>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>Ile</span></p>
+  </td>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>Thr</span></p>
+  </td>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>Lys</span></p>
+  </td>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>Arg</span></p>
+  </td>
+  <td style='border-top:none;border-left:solid #DDDDDD 1.0pt;border-bottom:
+  none;border-right:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:center;line-height:normal'><b><span style='font-size:12.0pt;
+  font-family:"Times New Roman",serif;color:black'>A</span></b></p>
+  </td>
+ </tr>
+ <tr style='height:22.5pt'>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>Met</span></p>
+  </td>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>Thr</span></p>
+  </td>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>Lys</span></p>
+  </td>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>Arg</span></p>
+  </td>
+  <td style='border-top:none;border-left:solid #DDDDDD 1.0pt;border-bottom:
+  none;border-right:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:center;line-height:normal'><b><span style='font-size:12.0pt;
+  font-family:"Times New Roman",serif;color:black'>G</span></b></p>
+  </td>
+ </tr>
+ <tr style='height:22.5pt'>
+  <td rowspan=4 style='border-top:none;border-left:solid #DDDDDD 1.0pt;
+  border-bottom:solid #DDDDDD 1.0pt;border-right:none;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><b><span style='font-size:12.0pt;
+  font-family:"Times New Roman",serif;color:black'>G</span></b></p>
+  </td>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>Val</span></p>
+  </td>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>Ala</span></p>
+  </td>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>Asp</span></p>
+  </td>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>Gly</span></p>
+  </td>
+  <td style='border-top:none;border-left:solid #DDDDDD 1.0pt;border-bottom:
+  none;border-right:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:center;line-height:normal'><b><span style='font-size:12.0pt;
+  font-family:"Times New Roman",serif;color:black'>U</span></b></p>
+  </td>
+ </tr>
+ <tr style='height:22.5pt'>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>Val</span></p>
+  </td>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>Ala</span></p>
+  </td>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>Asp</span></p>
+  </td>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>Gly</span></p>
+  </td>
+  <td style='border-top:none;border-left:solid #DDDDDD 1.0pt;border-bottom:
+  none;border-right:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:center;line-height:normal'><b><span style='font-size:12.0pt;
+  font-family:"Times New Roman",serif;color:black'>C</span></b></p>
+  </td>
+ </tr>
+ <tr style='height:22.5pt'>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>Val</span></p>
+  </td>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>Ala</span></p>
+  </td>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>Glu</span></p>
+  </td>
+  <td style='border:none;border-left:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>Gly</span></p>
+  </td>
+  <td style='border-top:none;border-left:solid #DDDDDD 1.0pt;border-bottom:
+  none;border-right:solid #DDDDDD 1.0pt;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:center;line-height:normal'><b><span style='font-size:12.0pt;
+  font-family:"Times New Roman",serif;color:black'>A</span></b></p>
+  </td>
+ </tr>
+ <tr style='height:22.5pt'>
+  <td style='border-top:none;border-left:solid #DDDDDD 1.0pt;border-bottom:
+  solid #DDDDDD 1.0pt;border-right:none;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>Val</span></p>
+  </td>
+  <td style='border-top:none;border-left:solid #DDDDDD 1.0pt;border-bottom:
+  solid #DDDDDD 1.0pt;border-right:none;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>Ala</span></p>
+  </td>
+  <td style='border-top:none;border-left:solid #DDDDDD 1.0pt;border-bottom:
+  solid #DDDDDD 1.0pt;border-right:none;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>Glu</span></p>
+  </td>
+  <td style='border-top:none;border-left:solid #DDDDDD 1.0pt;border-bottom:
+  solid #DDDDDD 1.0pt;border-right:none;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:left;line-height:normal'><span style='font-size:12.0pt;font-family:
+  "Times New Roman",serif;color:black'>Gly</span></p>
+  </td>
+  <td style='border:solid #DDDDDD 1.0pt;border-top:none;padding:2.25pt 2.25pt 2.25pt 2.25pt;
+  height:22.5pt'>
+  <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
+  text-align:center;line-height:normal'><b><span style='font-size:12.0pt;
+  font-family:"Times New Roman",serif;color:black'>G</span></b></p>
+  </td>
+ </tr>
+</table>
+</div>
+
+<p align=left style='margin-top:7.5pt;margin-right:0cm;
+margin-bottom:7.5pt;margin-left:0cm;text-align:left;line-height:30.0pt;
+mso-pagination:widow-orphan;mso-outline-level:2'><b><span style='font-size:
+22.5pt;font-family:"Helvetica",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:#333333'>Input<o:p></o:p></span></b></p>
+
+<p align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+text-align:left;line-height:normal;mso-pagination:widow-orphan'><span
+style='font-size:11.5pt;font-family:"Courier New";mso-fareast-font-family:"Times New Roman";
+color:#333333'>The input for this program consists of strands of DNA sequences,
+one strand per line, from which the protein it generates, if any, should be
+determined and output. The given DNA strand may be either the primary or the
+complementary DNA strand, and it may appear in either forward or reverse order,
+and the start and termination sequences do not necessarily appear at the ends
+of the strand. For example, a given input DNA strand to form the protein
+Ser-Ile-Lys could be any of ATACTCGTAATTCACTCC, CCTCACTTAATGCTCATA,
+TATGAGCATTAAGTGAGG, or GGAGTGAATTACGAGTAT. The input will be terminated by a
+line containing a single asterisk character.<o:p></o:p></span></p>
+
+<p align=left style='margin-top:7.5pt;margin-right:0cm;
+margin-bottom:7.5pt;margin-left:0cm;text-align:left;line-height:30.0pt;
+mso-pagination:widow-orphan;mso-outline-level:2'><b><span style='font-size:
+22.5pt;font-family:"Helvetica",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:#333333'>Output<o:p></o:p></span></b></p>
+
+<p align=left style='margin-bottom:0cm;margin-bottom:.0001pt;
+text-align:left;line-height:normal;mso-pagination:widow-orphan'><span
+style='font-size:11.5pt;font-family:"Courier New";mso-fareast-font-family:"Times New Roman";
+color:#333333'>You may assume the input to contain only valid, upper-case, DNA
+nucleotide base letters (A, C, G, and T). No input line will exceed 255
+characters in length. There will be no blank lines or spaces in the input. Some
+sequences, though valid DNA strands, do not produce valid protein sequences;
+the string &quot;*** No translatable DNA found ***&quot; should be output when
+an input DNA strand does not translate into a valid protein.<o:p></o:p></span></p>
+
+<p align=left style='margin-top:7.5pt;margin-right:0cm;
+margin-bottom:7.5pt;margin-left:0cm;text-align:left;line-height:30.0pt;
+mso-pagination:widow-orphan;mso-outline-level:2'><b><span style='font-size:
+22.5pt;font-family:"Helvetica",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:#333333'>Sample Input<o:p></o:p></span></b></p>
+
+<p align=left style='margin-bottom:7.5pt;text-align:left;
+line-height:15.0pt;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:whitesmoke;word-break:break-all'><span style='font-size:10.0pt;
+font-family:Consolas;mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:
+"Courier New";color:#333333'>ATACTCGTAATTCACTCC<o:p></o:p></span></p>
+
+<p align=left style='margin-bottom:7.5pt;text-align:left;
+line-height:15.0pt;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:whitesmoke;word-break:break-all'><span style='font-size:10.0pt;
+font-family:Consolas;mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:
+"Courier New";color:#333333'>CACCTGTACACAGAGGTAACTTAG<o:p></o:p></span></p>
+
+<p align=left style='margin-bottom:7.5pt;text-align:left;
+line-height:15.0pt;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:whitesmoke;word-break:break-all'><span style='font-size:10.0pt;
+font-family:Consolas;mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:
+"Courier New";color:#333333'>TTAATACGACATAATTAT<o:p></o:p></span></p>
+
+<p align=left style='margin-bottom:7.5pt;text-align:left;
+line-height:15.0pt;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:whitesmoke;word-break:break-all'><span style='font-size:10.0pt;
+font-family:Consolas;mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:
+"Courier New";color:#333333'>GCCTTGATATGGAGAACTCATTAGATA<o:p></o:p></span></p>
+
+<p align=left style='margin-bottom:7.5pt;text-align:left;
+line-height:15.0pt;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:whitesmoke;word-break:break-all'><span style='font-size:10.0pt;
+font-family:Consolas;mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:
+"Courier New";color:#333333'>AAGTGTATGTTGAATTATATAAAACGGGCATGA<o:p></o:p></span></p>
+
+<p align=left style='margin-bottom:7.5pt;text-align:left;
+line-height:15.0pt;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:whitesmoke;word-break:break-all'><span style='font-size:10.0pt;
+font-family:Consolas;mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:
+"Courier New";color:#333333'>ATGATGATGGCTTGA<o:p></o:p></span></p>
+
+<p align=left style='margin-bottom:7.5pt;text-align:left;
+line-height:15.0pt;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:whitesmoke;word-break:break-all'><span style='font-size:10.0pt;
+font-family:Consolas;mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:
+"Courier New";color:#333333'>*<o:p></o:p></span></p>
+
+<p align=left style='margin-top:7.5pt;margin-right:0cm;
+margin-bottom:7.5pt;margin-left:0cm;text-align:left;line-height:30.0pt;
+mso-pagination:widow-orphan;mso-outline-level:2'><b><span style='font-size:
+22.5pt;font-family:"Helvetica",sans-serif;mso-fareast-font-family:"Times New Roman";
+color:#333333'>Sample Output<o:p></o:p></span></b></p>
+
+<p align=left style='margin-bottom:7.5pt;text-align:left;
+line-height:15.0pt;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:whitesmoke;word-break:break-all'><span style='font-size:10.0pt;
+font-family:Consolas;mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:
+"Courier New";color:#333333'>Ser-Ile-Lys<o:p></o:p></span></p>
+
+<p align=left style='margin-bottom:7.5pt;text-align:left;
+line-height:15.0pt;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:whitesmoke;word-break:break-all'><span style='font-size:10.0pt;
+font-family:Consolas;mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:
+"Courier New";color:#333333'>Cys-Leu-His<o:p></o:p></span></p>
+
+<p align=left style='margin-bottom:7.5pt;text-align:left;
+line-height:15.0pt;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:whitesmoke;word-break:break-all'><span style='font-size:10.0pt;
+font-family:Consolas;mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:
+"Courier New";color:#333333'>Ser-Tyr<o:p></o:p></span></p>
+
+<p align=left style='margin-bottom:7.5pt;text-align:left;
+line-height:15.0pt;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:whitesmoke;word-break:break-all'><span style='font-size:10.0pt;
+font-family:Consolas;mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:
+"Courier New";color:#333333'>*** No translatable DNA found ***<o:p></o:p></span></p>
+
+<p align=left style='margin-bottom:7.5pt;text-align:left;
+line-height:15.0pt;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:whitesmoke;word-break:break-all'><span style='font-size:10.0pt;
+font-family:Consolas;mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:
+"Courier New";color:#333333'>Leu-Asn-Tyr-Ile-Lys-Arg-Ala<o:p></o:p></span></p>
+
+<p align=left style='margin-bottom:7.5pt;text-align:left;
+line-height:15.0pt;mso-pagination:widow-orphan;tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+background:whitesmoke;word-break:break-all'><span style='font-size:10.0pt;
+font-family:Consolas;mso-fareast-font-family:"Times New Roman";mso-bidi-font-family:
+"Courier New";color:#333333'>Met-Met-Ala<o:p></o:p></span></p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+</div>
+
+</body>
+
+</html>

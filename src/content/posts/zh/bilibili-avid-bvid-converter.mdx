@@ -1,0 +1,21 @@
+---
+title: Bilibili AV号/BV号互转工具
+date: 2020-03-25
+tags: [JavaScript, Bilibili, 前端]
+---
+
+import BilibiliIdConverter from "@/widgets/BilibiliIdConverter.vue";
+
+## 0x00 前言
+
+最近B站把AV号换成了BV号，但是原来的av号还能继续使用。\
+突然心血来潮想写一个AV号转BV号互转的工具，最好是B/S的（毕竟没啥人愿意为查个AV号下一个Python什么的）。\
+前端没什么经验，还在门外面晃悠，在经历过一系列坎坷之后，终于让我给写出来了。
+
+20210110 更新：知乎大佬@mcfx破解了[BV号的算法](https://www.zhihu.com/question/381784377)，于是决定重写，将计算全部限制在浏览器端。
+
+## 0x01 演示
+
+<Demo title="AV/BV">
+  <BilibiliIdConverter client:visible lang="zh" />
+</Demo>

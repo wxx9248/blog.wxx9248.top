@@ -58,13 +58,20 @@ const { lang, slug } = post;
 
   .post :global(h2),
   .post :global(h3),
-  .post :global(h4) {
+  .post :global(h4),
+  .post :global(h5),
+  .post :global(h6) {
     margin: var(--space-8) 0 var(--space-3);
     color: var(--color-text-heading);
     line-height: 1.35;
   }
 
-  .post :global(:is(h2, h3, h4) > a) {
+  /* The browser default for h6 is well below the body text */
+  .post :global(:is(h5, h6)) {
+    font-size: var(--text-chrome);
+  }
+
+  .post :global(:is(h2, h3, h4, h5, h6) > a) {
     color: inherit;
     text-decoration: none;
   }

@@ -29,6 +29,10 @@ describe("excerpt", () => {
     );
   });
 
+  it("drops hard line breaks", () => {
+    expect(excerpt("第一行\\\n第二行")).toBe("第一行 第二行");
+  });
+
   it("truncates long excerpts", () => {
     expect(excerpt("word ".repeat(100), 20)).toMatch(/^.{19}…$/u);
   });

@@ -1,6 +1,7 @@
 import { defaultLocale, localeInfo, locales } from "./src/i18n/locales";
 import { rehypeHeadingIds, unified } from "@astrojs/markdown-remark";
 import { defineConfig } from "astro/config";
+import { devRedirects } from "./src/integrations/dev-redirects";
 import expressiveCode from "astro-expressive-code";
 import { giscusConfigCheck } from "./src/integrations/giscus-config-check";
 import { giscusOrigin } from "./src/lib/giscus/client";
@@ -30,6 +31,7 @@ export default defineConfig({
       useDarkModeMediaQuery: true
     }),
     mdx(),
+    devRedirects(),
     giscusConfigCheck(),
     sitemap({
       /*
@@ -59,7 +61,13 @@ export default defineConfig({
         rehypeHeadingMarkers,
         [rehypeAutolinkHeadings, { behavior: "wrap" }]
       ],
-      remarkPlugins: [remarkMath]
+      remarkPlugins: [remarkMath],
+      // The default sr-only class isn't defined here, so the label would show
+      remarkRehype: {
+        // U+FE0E asks for the text arrow rather than the emoji
+        footnoteBackContent: "↩\uFE0E",
+        footnoteLabelProperties: { className: ["visually-hidden"] }
+      }
     })
   },
   // Lets Giscus's frame load its theme from `astro dev`, which blocks other sites

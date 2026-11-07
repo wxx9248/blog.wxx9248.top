@@ -98,6 +98,12 @@ video {
   overflow-x: auto;
 }
 
+/* Their heading is hidden, so a rule sets them apart from the post */
+.prose .footnotes {
+  margin-top: var(--space-8);
+  border-top: 1px solid var(--color-border-subtle);
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;

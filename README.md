@@ -50,6 +50,8 @@ Inside a post:
 
 - **Code:** fenced code blocks with a language get highlighting, a copy button and a frame. A `title="…"` after the language adds a file-tab title.
 - **Headings:** start at `##`; the post title is the page's only `#`.
+- **Line breaks:** a single newline doesn't break the line; end the line with `\` to force one.
+- **Files:** images and downloads go in `public/assets/<slug>/`, with no subfolders, linked as `/assets/<slug>/<file>`. Audio, video and anything over 25 MiB go in the `blog` bucket in Oracle Object Storage as `storage/<slug>/<file>`, linked as `/storage/<slug>/<file>`, because Cloudflare rejects bigger files and ignores the `Range` requests that seeking needs. `public/_redirects` sends that path to the bucket, and `pnpm dev` follows it too.
 
 ## Adding a translation
 
@@ -82,6 +84,7 @@ src/
   content.config.ts      post frontmatter schema
   i18n/                  locales and UI strings (ui/<lang>.ts), t() helper
   lib/                   logic by feature, unit-tested
+    bilibili/            AV/BV id conversion
     giscus/              comment settings and theme files
     language/            language choice, the "/" redirect, language switch targets
     markdown/            rehype plugins

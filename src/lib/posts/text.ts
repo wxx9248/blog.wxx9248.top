@@ -24,7 +24,9 @@ const inlineMarkup: readonly [RegExp, string][] = [
   [/<[^>]+>/gu, ""],
   [/`(?<code>[^`]*)`/gu, "$<code>"],
   [/(?<mark>\*\*|__|\*|_)(?<text>.+?)\k<mark>/gu, "$<text>"],
-  [/\$(?<tex>[^$]+)\$/gu, "$<tex>"]
+  [/\$(?<tex>[^$]+)\$/gu, "$<tex>"],
+  // A backslash at the end of a line is a hard line break
+  [/\\$/gmu, ""]
 ];
 
 /**
