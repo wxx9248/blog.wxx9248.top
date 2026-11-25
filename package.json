@@ -20,19 +20,19 @@
     "test": "pnpm test:unit && pnpm test:e2e"
   },
   "dependencies": {
-    "@astrojs/markdown-remark": "^7.3.9",
+    "@astrojs/markdown-remark": "^7.3.10",
     "@astrojs/mdx": "^8.1.6",
     "@astrojs/rss": "^4.0.19",
-    "@astrojs/sitemap": "^3.7.5",
+    "@astrojs/sitemap": "^3.7.6",
     "@astrojs/vue": "^7.1.6",
     "@wxx9248/colors": "^1.1.0",
-    "astro": "^7.4.12",
-    "astro-expressive-code": "^0.44.3",
+    "astro": "^7.4.13",
+    "astro-expressive-code": "^0.44.4",
     "katex": "^0.19.1",
     "rehype-autolink-headings": "^7.1.0",
     "rehype-katex": "^7.0.1",
     "remark-math": "^6.0.0",
-    "vue": "^3.5.45"
+    "vue": "^3.5.46"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.12",
@@ -52,9 +52,9 @@
     "prettier": "^3.10.1",
     "prettier-plugin-astro": "^1.1.2",
     "typescript": "^6.0.3",
-    "typescript-eslint": "^8.73.0",
-    "vitest": "^5.1.0",
+    "typescript-eslint": "^8.74.0",
+    "vitest": "^5.1.1",
     "vue-tsc": "^3.3.14",
-    "wrangler": "^4.163.0"
+    "wrangler": "^4.167.0"
   }
 }
